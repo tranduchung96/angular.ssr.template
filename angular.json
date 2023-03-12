@@ -2,8 +2,13 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  },
   "projects": {
-    "angular.ssr.template": {
+    "angularssrtemplate": {
       "projectType": "application",
       "root": "",
       "sourceRoot": "src",
@@ -19,9 +24,15 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
+              "src/theme.less",
               "src/styles.scss"
             ],
             "scripts": []
@@ -31,8 +42,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -57,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular.io-example:build:production"
+              "browserTarget": "angularssrtemplate:build:production"
             },
             "development": {
-              "browserTarget": "angular.io-example:build:development"
+              "browserTarget": "angularssrtemplate:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -68,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular.io-example:build"
+            "browserTarget": "angularssrtemplate:build"
           }
         },
         "test": {
@@ -90,11 +101,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular.io-example:serve"
+            "devServerTarget": "angularssrtemplate:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular.io-example:serve:production"
+              "devServerTarget": "angularssrtemplate:serve:production"
             }
           }
         },
@@ -121,12 +132,12 @@
           "builder": "@nguniversal/builders:ssr-dev-server",
           "configurations": {
             "development": {
-              "browserTarget": "angular.io-example:build:development",
-              "serverTarget": "angular.io-example:server:development"
+              "browserTarget": "angularssrtemplate:build:development",
+              "serverTarget": "angularssrtemplate:server:development"
             },
             "production": {
-              "browserTarget": "angular.io-example:build:production",
-              "serverTarget": "angular.io-example:server:production"
+              "browserTarget": "angularssrtemplate:build:production",
+              "serverTarget": "angularssrtemplate:server:production"
             }
           },
           "defaultConfiguration": "development"
@@ -140,12 +151,12 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular.io-example:build:production",
-              "serverTarget": "angular.io-example:server:production"
+              "browserTarget": "angularssrtemplate:build:production",
+              "serverTarget": "angularssrtemplate:server:production"
             },
             "development": {
-              "browserTarget": "angular.io-example:build:development",
-              "serverTarget": "angular.io-example:server:development"
+              "browserTarget": "angularssrtemplate:build:development",
+              "serverTarget": "angularssrtemplate:server:development"
             }
           },
           "defaultConfiguration": "production"
